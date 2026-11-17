@@ -21,7 +21,7 @@ An adaptive minimap and a full world map for Horizon, with a persistent per-worl
 - Overworld and Nether world borders are drawn on both maps (the Nether border is scaled to the same physical area).
 - Relief shading crosses chunk borders; unknown terrain is transparent; the minimap renders at high resolution for smooth movement.
 - Settings and named waypoints persist asynchronously in the mod data folder. Waypoints are isolated by save/server identity and dimension, with 64 points per world/server. Legacy unscoped points are deleted on upgrade; preferences are retained.
-- Large-map terrain is drawn as GPU tiles and retains original terrain texels at every zoom. Detailed and LOD terrain, sampled heights, biome names and portals persist across reconnects and restarts in one `.mwwr` container per single-player save/server address. A **Map RAM** slider (16–512 MiB, default 64 MiB) budgets retained terrain; no network requests are made by the mod.
+- Both maps stream reusable GPU tile pages. Persistent world-space overview tiles accelerate distant views; camera and zoom targets are prefetched, retaining coarse coverage until finer tiles are ready. Detailed terrain preserves original block texels when zoomed in. Detailed and LOD terrain, sampled heights, biome names and portals persist across reconnects and restarts in one `.mwwr` container per single-player save/server address. A **Map RAM** slider (16–512 MiB, default 64 MiB) budgets retained terrain; no network requests are made by the mod.
 - Each of the 67 vanilla biomes has an individual 16×16 icon. Waypoint colours can be edited, and Show on map centres the world map on a selected waypoint.
 - World, actual-render/LOD and chunk-render borders have hover labels; right-click outlines the selected chunk and region.
 
@@ -33,10 +33,33 @@ owner_ids = [355298203]
 license = "GPL-3.0-only"
 source = "https://github.com/Gurov08ruS/Minimap-Worldmap-and-waypoints-reworked"
 icon = "icons/minimap_worldmap_waypoints_reworked.png"
+screenshots = [
+  "screenshots/minimap_worldmap_waypoints_reworked/world-map-long-distance.png",
+  "screenshots/minimap_worldmap_waypoints_reworked/world-map.png",
+  "screenshots/minimap_worldmap_waypoints_reworked/world-map-overview.png",
+  "screenshots/minimap_worldmap_waypoints_reworked/nether-portal.png",
+  "screenshots/minimap_worldmap_waypoints_reworked/end.png",
+  "screenshots/minimap_worldmap_waypoints_reworked/create-waypoint.png",
+  "screenshots/minimap_worldmap_waypoints_reworked/waypoint-on-map.png",
+]
 categories = ["utility", "adventure"]
 tags = ["minimap", "map", "world-map", "waypoints", "navigation", "hud", "portals", "biome"]
 
 key = "RWQwVo88UXiKlIF0MG0YSn9MFlxcdlzoQUx7yQiXVZEciCpDzgPFW4RJ"
+
+[[versions]]
+version = "0.6.1"
+published = "2026-11-17"
+game = "26.3"
+file = "minimap_worldmap_waypoints_reworked-0.6.1.hnmod"
+sha256 = "bc28471909a02514f81b035871bf6c4b774c361ae26330e57494b3aa6c9d4ed5"
+changelog = "Faster distant LOD acquisition, persistent world-space overview tiles, camera/zoom prefetch, retained coarse coverage during detail loading, reusable GPU pages and bounded sampling/I/O/shading workers. Adds a map screenshot with 1024-chunk LOD distance. Existing canonical terrain is preserved; overview backfill runs in the background. Exact Horizon and Mixins pins are unchanged."
+signature = '''
+untrusted comment: signature from minisign secret key
+RUQwVo88UXiKlN5Dytx2R4K3cLsLj2gIqKGbp+buWty3Y5wGlg6jh9c7MJC2PnzV+zf27hM1WVYXQJpjzuyzCJMu4yMcjWjy4gw=
+trusted comment: minimap_worldmap_waypoints_reworked 0.6.1; Horizon 9f42064c11efe7ef3e5ed2baad7ddc2a3b36eea0
+Pan98IwEigjEOaQOoPPsbp/nSia9X/bRU5Q2ANh9i3xw6pwbW6SGevUP86RSz2R50U744gSk1LxKSFHgs69qCw==
+'''
 
 [[versions]]
 version = "0.6.0"
